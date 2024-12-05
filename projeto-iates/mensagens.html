@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="images/barco2.png" type="image/x-icon" />
+  <title>Luxo - Mensagens Recebidas</title>
+  <link rel="stylesheet" href="css/default.css">
+</head>
+
+<body>
+  <div class="page">
+    <header id="header-msg">
+      <h1>Mensagens Recebidas</h1>
+    </header>
+
+    <main>
+      <table id="mensagens-table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Mensagem</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </main>
+
+    <footer>
+      <p>© 2023 Luxo - Aluguel de Iates</p>
+    </footer>
+  </div>
+
+  <script src="js/jquery-3.6.4.min.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tableBody = document.querySelector("#mensagens-table tbody");
+
+      function atualizarMensagens() {
+        const mensagens = obterMensagens();
+        tableBody.innerHTML = "";
+
+        mensagens.forEach(mensagem => {
+          const row = document.createElement("tr");
+
+          const nomeCell = document.createElement("td");
+          nomeCell.textContent = mensagem.nome;
+
+          const emailCell = document.createElement("td");
+          emailCell.textContent = mensagem.email;
+
+          const mensagemCell = document.createElement("td");
+          mensagemCell.textContent = mensagem.mensagem;
+
+          row.appendChild(nomeCell);
+          row.appendChild(emailCell);
+          row.appendChild(mensagemCell);
+
+          tableBody.appendChild(row);
+        });
+      }
+
+      setInterval(atualizarMensagens, 5000);
+      atualizarMensagens();
+    });
+  </script>
+</body>
+
+</html>
